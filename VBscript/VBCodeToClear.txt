@@ -1,0 +1,3 @@
+Sub ClearSheet()
+Sheets("Hoja 1").Cells.Clear
+End Sub
