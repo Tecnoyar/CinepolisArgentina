@@ -1,6 +1,6 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="DownloadFTPFileToLocal" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="769,1448" sap2010:WorkflowViewState.IdRef="DownloadFTPFileToLocal_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="DownloadFTPFileToLocal" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="769,1283" sap2010:WorkflowViewState.IdRef="DownloadFTPFileToLocal_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="27">
+    <scg:List x:TypeArguments="x:String" Capacity="54">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -28,10 +28,14 @@
       <x:String>System.Runtime.Serialization</x:String>
       <x:String>System.Xml.Serialization</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="18">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="36">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -50,9 +54,21 @@
       <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
       <AssemblyReference>UiPath.FTP.Activities</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DownloadFTPFileToLocal" sap:VirtualizedContainerService.HintSize="554,1383" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DownloadFTPFileToLocal" sap:VirtualizedContainerService.HintSize="476,1218" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:FtpSessionGen" Name="FTPSession" />
     </Sequence.Variables>
@@ -61,51 +77,35 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:OpenFTPSession KeyFiles="{x:Null}" DisplayName="Open FTP session" FTPSession="[FTPSession]" sap:VirtualizedContainerService.HintSize="512,1291" Host="ftp.tecnoyar.com" sap2010:WorkflowViewState.IdRef="OpenFTPSession_1" Password="Nft8}4zxb)RV" Port="21" SecureFTP="False" Username="rpanotificaciones@tecnoyar.com">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="434,305" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[directory.GetFiles(&quot;Data\Temp\&quot;)]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="fileName" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,171" sap2010:WorkflowViewState.IdRef="Sequence_7">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="334,79" sap2010:WorkflowViewState.IdRef="Delete_2" Path="[fileName]" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:OpenFTPSession KeyFiles="{x:Null}" DisplayName="Open FTP session" FTPSession="[FTPSession]" sap:VirtualizedContainerService.HintSize="434,781" Host="ftp.tecnoyar.com" sap2010:WorkflowViewState.IdRef="OpenFTPSession_1" Password="Nft8}4zxb)RV" Port="21" SecureFTP="False" Username="rpanotificaciones@tecnoyar.com">
       <ui:OpenFTPSession.Body>
-        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="478,1182" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,672" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,285" sap2010:WorkflowViewState.IdRef="CommentOut_1">
-            <ui:CommentOut.Body>
-              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,207" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_1" LocalPath="C:\Users\HP\Desktop\CinepolishArgentina\Compras\Compras_Web_20210111" RemotePath="/Planeacion/0.Envios TS 2021/30 Envio Semana 30/Argentina/Tradicional/No Socios/NO_SOCIOS_BD_Argentina__Semana_25_30_oct.csv" SecureFTP="False" />
-              </Sequence>
-            </ui:CommentOut.Body>
-          </ui:CommentOut>
-          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,285" sap2010:WorkflowViewState.IdRef="CommentOut_2">
-            <ui:CommentOut.Body>
-              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,207" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_2" LocalPath="C:\Users\HP\Desktop\CinepolishArgentina\Compras\Compras_Web_20210111" RemotePath="/Planeacion/0.Envios TS 2021/1 Directorio/Directorio_Claves_Cinépolis_SALAM.xlsx" SecureFTP="False" />
-              </Sequence>
-            </ui:CommentOut.Body>
-          </ui:CommentOut>
-          <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="436,115" sap2010:WorkflowViewState.IdRef="Download_3" LocalPath="C:\Users\HP\Desktop\CinepolishArgentina\Compras\Compras_Web_20210111" RemotePath="/Planeacion/0.Envios TS 2021/30 Envio Semana 30/Argentina/Base de Datos/Argentina_Black_List_Tracking_2021.xlsx" SecureFTP="False" />
-          <ui:CommentOut DisplayName="Comment Out" sap:VirtualizedContainerService.HintSize="436,285" sap2010:WorkflowViewState.IdRef="CommentOut_4">
-            <ui:CommentOut.Body>
-              <Sequence DisplayName="Ignored Activities" sap:VirtualizedContainerService.HintSize="376,207" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_4" LocalPath="C:\Users\HP\Desktop\CinepolishArgentina\Compras\Compras_Web_20210111" RemotePath="/Planeacion/0.Envios TS 2021/30 Envio Semana 30/Argentina/Base de Datos/TRAD_ARGENTINA_01_24_octubre_2021.xlsx" SecureFTP="False" />
-              </Sequence>
-            </ui:CommentOut.Body>
-          </ui:CommentOut>
+          <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_1" LocalPath="Data\Temp\" RemotePath="/Planeacion/0.Envios TS 2021/30 Envio Semana 30/Argentina/Tradicional/No Socios/NO_SOCIOS_BD_Argentina__Semana_25_30_oct.csv" SecureFTP="False" />
+          <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_2" LocalPath="Data\Temp\" RemotePath="/Planeacion/0.Envios TS 2021/1 Directorio/Directorio_Claves_Cinépolis_SALAM.xlsx" SecureFTP="False" />
+          <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_3" LocalPath="Data\Temp\" RemotePath="/Planeacion/0.Envios TS 2021/30 Envio Semana 30/Argentina/Base de Datos/Argentina_Black_List_Tracking_2021.xlsx" SecureFTP="False" />
+          <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_4" LocalPath="Data\Temp\" RemotePath="/Planeacion/0.Envios TS 2021/30 Envio Semana 30/Argentina/Base de Datos/TRAD_ARGENTINA_01_24_octubre_2021.xlsx" SecureFTP="False" />
         </Sequence>
       </ui:OpenFTPSession.Body>
       <sap:WorkflowViewStateService.ViewState>
