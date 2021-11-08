@@ -3,11 +3,12 @@
     <x:Property Name="in_InputDataTable" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_BlackListTrackingDatatable" Type="InArgument(sd:DataTable)" />
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_TempBDFileName" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>769,2291</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>769,2437</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>workingWithTemplate_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="35">
@@ -49,7 +50,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="30">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="60">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -80,11 +81,12 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>datatable_to_html</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="workingWithNoSociosDT" sap:VirtualizedContainerService.HintSize="526,2226" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="workingWithNoSociosDT" sap:VirtualizedContainerService.HintSize="526,2372" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="sd:DataTable" Name="noSociosBdDT" />
+      <Variable x:TypeArguments="sd:DataTable" Name="tempBdDT" />
       <Variable x:TypeArguments="sd:DataTable" Name="regionesArgentinaDT" />
       <Variable x:TypeArguments="sd:DataTable" Name="NDMailsDT" />
     </Sequence.Variables>
@@ -101,91 +103,83 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:KillProcess>
-    <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application NO_SOCIOS_BD" sap:VirtualizedContainerService.HintSize="484,998" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" InstanceCachePeriod="3000" Visible="False" WorkbookPath="Compras\Compras_Web_20210111\NO_SOCIOS_BD_Argentina__Semana_25_30_oct.csv">
+    <ui:ExcelApplicationScope Password="{x:Null}" CreateNewFile="False" DisplayName="Excel Application NO_SOCIOS_BD" sap:VirtualizedContainerService.HintSize="484,1144" sap2010:WorkflowViewState.IdRef="ExcelApplicationScope_2" InstanceCachePeriod="3000" Visible="False" WorkbookPath="[&quot;Data\Temp\&quot;+in_TempBDFileName]">
       <ui:ExcelApplicationScope.Body>
         <ActivityAction x:TypeArguments="ui:WorkbookApplication">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="ui:WorkbookApplication" Name="ExcelWorkbookScope" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="304,889" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,1035" sap2010:WorkflowViewState.IdRef="Sequence_3">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelReadRange Range="{x:Null}" AddHeaders="False" DataTable="[noSociosBdDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="NO_SOCIOS_BD_Argentina__Semana_">
+            <ui:ExcelReadRange Range="{x:Null}" AddHeaders="False" DataTable="[tempBdDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_1" SheetName="[in_Config(&quot;TempSheetName&quot;).ToString]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ExcelReadRange>
-            <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[in_InputDataTable]" DisplayName="Read input datatable" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="Compras_Web_20210111" WorkbookPath="Data\Input\input.xlsx">
+            <ui:ExcelWriteRange AddHeaders="False" DataTable="[in_InputDataTable.DefaultView.ToTable(False,&quot;Name&quot;,&quot;DateTime&quot;)]" DisplayName="Write B2 Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="[in_Config(&quot;TempSheetName&quot;).ToString]" StartingCell="B2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:ReadRange>
-            <ui:ExcelWriteRange AddHeaders="False" DataTable="[in_InputDataTable.DefaultView.ToTable(False,&quot;Name&quot;,&quot;DateTime&quot;)]" DisplayName="Write B2 Range" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_2" SheetName="NO_SOCIOS_BD_Argentina__Semana_" StartingCell="B2">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ExcelWriteRange>
-            <ui:ExcelWriteRange AddHeaders="False" DataTable="[in_InputDataTable.DefaultView.ToTable(false,&quot;EmailID&quot;,&quot;Company&quot;)]" DisplayName="Write E2 Range" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_4" SheetName="NO_SOCIOS_BD_Argentina__Semana_" StartingCell="E2">
+            <ui:ExcelWriteRange AddHeaders="False" DataTable="[in_InputDataTable.DefaultView.ToTable(false,&quot;EmailID&quot;,&quot;Company&quot;)]" DisplayName="Write E2 Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_4" SheetName="[in_Config(&quot;TempSheetName&quot;).ToString]" StartingCell="E2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ExcelWriteRange>
-            <ui:ExcelWriteRange AddHeaders="False" DataTable="[in_InputDataTable.DefaultView.ToTable(false,&quot;CL_CINE&quot;)]" DisplayName="Write I2 Range" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_5" SheetName="NO_SOCIOS_BD_Argentina__Semana_" StartingCell="I2">
+            <ui:ExcelWriteRange AddHeaders="False" DataTable="[in_InputDataTable.DefaultView.ToTable(false,&quot;CL_CINE&quot;)]" DisplayName="Write I2 Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_5" SheetName="[in_Config(&quot;TempSheetName&quot;).ToString]" StartingCell="I2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ExcelWriteRange>
-            <ui:ExcelReadRange Range="{x:Null}" AddHeaders="True" DataTable="[noSociosBdDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="NO_SOCIOS_BD_Argentina__Semana_">
+            <ui:ExcelReadRange Range="{x:Null}" AddHeaders="True" DataTable="[tempBdDT]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="ExcelReadRange_2" SheetName="[in_Config(&quot;TempSheetName&quot;).ToString]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ExcelReadRange>
-            <ui:InvokeCode ContinueOnError="{x:Null}" Code="var rand = new Random();&#xA;dataTable = dataTable.AsEnumerable().OrderBy(r =&gt; rand.Next()).CopyToDataTable();" DisplayName="Invoke code to randomize data rows" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+            <ui:InvokeCode ContinueOnError="{x:Null}" Code="var rand = new Random();&#xA;dataTable = dataTable.AsEnumerable().OrderBy(r =&gt; rand.Next()).CopyToDataTable();" DisplayName="Invoke code to randomize data rows" sap:VirtualizedContainerService.HintSize="334,164" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
               <ui:InvokeCode.Arguments>
-                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[noSociosBdDT]</InOutArgument>
+                <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[tempBdDT]</InOutArgument>
               </ui:InvokeCode.Arguments>
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:InvokeCode>
-            <Assign DisplayName="Remove duplicate CORREO" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+            <Assign DisplayName="Remove duplicate CORREO" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_8">
               <Assign.To>
-                <OutArgument x:TypeArguments="sd:DataTable">[noSociosBdDT]</OutArgument>
+                <OutArgument x:TypeArguments="sd:DataTable">[tempBdDT]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="sd:DataTable">[noSociosBdDT.AsEnumerable().GroupBy(Function(a) a.Field(Of String)("CORREO")).Select(Function(b) b.First).CopyToDataTable()]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable">[tempBdDT.AsEnumerable().GroupBy(Function(a) a.Field(Of String)("CORREO")).Select(Function(b) b.First).CopyToDataTable()]</InArgument>
               </Assign.Value>
             </Assign>
-            <Assign DisplayName="Remove duplicate CORREO" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_10">
+            <Assign DisplayName="Remove duplicate CORREO" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_10">
               <Assign.To>
-                <OutArgument x:TypeArguments="sd:DataTable">[noSociosBdDT]</OutArgument>
+                <OutArgument x:TypeArguments="sd:DataTable">[tempBdDT]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="sd:DataTable">[noSociosBdDT.AsEnumerable().GroupBy(Function(a) a.Field(Of String)("CORREO")).Select(Function(b) b.First).CopyToDataTable()]</InArgument>
+                <InArgument x:TypeArguments="sd:DataTable">[tempBdDT.AsEnumerable().GroupBy(Function(a) a.Field(Of String)("CORREO")).Select(Function(b) b.First).CopyToDataTable()]</InArgument>
               </Assign.Value>
             </Assign>
           </Sequence>
@@ -206,7 +200,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadRange>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[noSociosBdDT]" DisplayName="For Each Row in noSociosBdDT" sap:VirtualizedContainerService.HintSize="484,186" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[tempBdDT]" DisplayName="For Each Row in noSociosBdDT" sap:VirtualizedContainerService.HintSize="484,186" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
@@ -459,7 +453,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:FilterDataTable DataTable="[noSociosBdDT]" DisplayName="Remove rows wth empty EmailID" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[noSociosBdDT]" SelectColumnsMode="Keep">
+    <ui:FilterDataTable DataTable="[tempBdDT]" DisplayName="Remove rows wth empty EmailID" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="FilterDataTable_1" OutputDataTable="[tempBdDT]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument Operand="{x:Null}" BooleanOperator="And" Operator="EMPTY">
@@ -493,7 +487,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:FilterDataTable DataTable="[noSociosBdDT]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[noSociosBdDT]" SelectColumnsMode="Keep">
+            <ui:FilterDataTable DataTable="[tempBdDT]" DisplayName="Filter Data Table" FilterRowsMode="Remove" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="FilterDataTable_2" OutputDataTable="[tempBdDT]" SelectColumnsMode="Keep">
               <ui:FilterDataTable.Filters>
                 <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
                   <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
@@ -524,7 +518,7 @@
     </ui:ForEachRow>
     <ui:InvokeCode ContinueOnError="{x:Null}" Code="var rand = new Random();&#xA;dataTable = dataTable.AsEnumerable().OrderBy(r =&gt; rand.Next()).CopyToDataTable();" DisplayName="Invoke code to randomize datarows" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
       <ui:InvokeCode.Arguments>
-        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[noSociosBdDT]</InOutArgument>
+        <InOutArgument x:TypeArguments="sd:DataTable" x:Key="dataTable">[tempBdDT]</InOutArgument>
       </ui:InvokeCode.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -545,7 +539,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:InvokeWorkflowFile>
-    <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[noSociosBdDT]" Delimitator="Comma" DisplayName="Write CSV" FilePath="Compras\Compras_Web_20210111\NO_SOCIOS_BD_Argentina__Semana_25_30_oct.csv" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1">
+    <ui:WriteCsvFile Encoding="{x:Null}" AddHeaders="True" DataTable="[tempBdDT]" Delimitator="Comma" DisplayName="Write CSV" FilePath="Compras\Compras_Web_20210111\NO_SOCIOS_BD_Argentina__Semana_25_30_oct.csv" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="WriteCsvFile_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -565,7 +559,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ExcelWriteRange AddHeaders="True" DataTable="[noSociosBdDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_7" SheetName="NO_SOCIOS_BD_Argentina__Semana_" StartingCell="A1">
+            <ui:ExcelWriteRange AddHeaders="True" DataTable="[tempBdDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="ExcelWriteRange_7" SheetName="NO_SOCIOS_BD_Argentina__Semana_" StartingCell="A1">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -583,7 +577,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ExcelApplicationScope>
-    <ui:FilterDataTable DataTable="[noSociosBdDT]" DisplayName="Filter NoSocios for #ND" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[NDMailsDT]" SelectColumnsMode="Keep">
+    <ui:FilterDataTable DataTable="[tempBdDT]" DisplayName="Filter NoSocios for #ND" FilterRowsMode="Keep" sap:VirtualizedContainerService.HintSize="484,51" sap2010:WorkflowViewState.IdRef="FilterDataTable_3" OutputDataTable="[NDMailsDT]" SelectColumnsMode="Keep">
       <ui:FilterDataTable.Filters>
         <scg:List x:TypeArguments="ui:FilterOperationArgument" Capacity="4">
           <ui:FilterOperationArgument BooleanOperator="And" Operator="CONTAINS">
@@ -636,17 +630,11 @@
           <d:Convert_DatTable_to_HTML ContinueOnError="{x:Null}" HtmlBodyWithTable="{x:Null}" DisplayName="Convert DatTable to HTML" HeaderBackroundColor="BlueViolet" HeaderTextColor="White" sap:VirtualizedContainerService.HintSize="334,22" HtmlTable="[htmltable]" sap2010:WorkflowViewState.IdRef="Convert_DatTable_to_HTML_1" Input_datatable="[NDMailsDT]" TableBodyBackgroundColor="" TableBodyTextColor="Black" TableTextAlign="Center" />
           <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke SendGmail workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Mail\SendGmail.xaml">
             <ui:InvokeWorkflowFile.Arguments>
-              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-                <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-              </InArgument>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[in_Config]</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_To" />
-              <InArgument x:TypeArguments="x:String" x:Key="in_Subject">
-                <Literal x:TypeArguments="x:String">Below table data is not #ND code data</Literal>
-              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Subject">Below table data is not #ND code data</InArgument>
               <InArgument x:TypeArguments="x:String" x:Key="in_CC" />
-              <InArgument x:TypeArguments="x:String" x:Key="in_Body">
-                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="htmltable" />
-              </InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Body">[htmltable]</InArgument>
             </ui:InvokeWorkflowFile.Arguments>
           </ui:InvokeWorkflowFile>
         </Sequence>
