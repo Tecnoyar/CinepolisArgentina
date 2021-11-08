@@ -3,6 +3,7 @@
   "description": "this process works with excel and FTP",
   "main": "CinepolisArgentina.xaml",
   "dependencies": {
+    "DatatableToHtmlTableString": "[1.0.1]",
     "UiPath.Excel.Activities": "[2.10.2-preview]",
     "UiPath.FTP.Activities": "[1.0.6479.13206]",
     "UiPath.Mail.Activities": "[1.10.2-preview]",
@@ -45,6 +46,12 @@
     {
       "filePath": "Main.xaml",
       "uniqueId": "7b38eb6a-eaa4-4653-90df-d80e74f323c9",
+      "input": [],
+      "output": []
+    },
+    {
+      "filePath": "CinepolisArgentina.xaml",
+      "uniqueId": "833ba232-fe0a-4e61-b6d0-fa7a6902f564",
       "input": [],
       "output": []
     }
