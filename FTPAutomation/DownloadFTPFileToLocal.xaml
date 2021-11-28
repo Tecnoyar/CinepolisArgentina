@@ -26,7 +26,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>961,3358</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1363,3358</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>DownloadFTPFileToLocal_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="31">
@@ -98,7 +98,7 @@
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="DownloadFTPFileToLocal" sap:VirtualizedContainerService.HintSize="971,3293" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="DownloadFTPFileToLocal" sap:VirtualizedContainerService.HintSize="1373,3293" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ui:FtpSessionGen" Name="FTPSession" />
     </Sequence.Variables>
@@ -107,7 +107,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each file in temp" sap:VirtualizedContainerService.HintSize="929,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[directory.GetFiles(&quot;Data\Temp\&quot;)]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each file in temp" sap:VirtualizedContainerService.HintSize="1331,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[directory.GetFiles(&quot;Data\Temp\&quot;)]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
@@ -130,9 +130,9 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:OpenFTPSession KeyFiles="{x:Null}" DisplayName="Open FTP session" FTPSession="[FTPSession]" sap:VirtualizedContainerService.HintSize="929,3110" Host="[in_Config(&quot;FTPserver&quot;).ToString]" sap2010:WorkflowViewState.IdRef="OpenFTPSession_1" Password="[in_Config(&quot;FTPPass&quot;).ToString]" Port="[convert.ToInt32(in_Config(&quot;FTPport&quot;).ToString)]" SecureFTP="False" Username="[in_Config(&quot;FTPUser&quot;).ToString]">
+    <ui:OpenFTPSession KeyFiles="{x:Null}" DisplayName="Open FTP session" FTPSession="[FTPSession]" sap:VirtualizedContainerService.HintSize="1331,3110" Host="[in_Config(&quot;FTPserver&quot;).ToString]" sap2010:WorkflowViewState.IdRef="OpenFTPSession_1" Password="[in_Config(&quot;FTPPass&quot;).ToString]" Port="[convert.ToInt32(in_Config(&quot;FTPport&quot;).ToString)]" SecureFTP="False" Username="[in_Config(&quot;FTPUser&quot;).ToString]">
       <ui:OpenFTPSession.Body>
-        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="895,3001" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1297,3001" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataTable" Name="filesDT" />
           </Sequence.Variables>
@@ -141,16 +141,16 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[in_TypeOfPocess.ToLower.Trim.Contains(&quot;nonpartner&quot;)]" DisplayName="If file type is non partner" sap:VirtualizedContainerService.HintSize="853,2363" sap2010:WorkflowViewState.IdRef="If_6">
+          <If Condition="[in_TypeOfPocess.ToLower.Trim.Contains(&quot;nonpartner&quot;)]" DisplayName="If file type is non partner" sap:VirtualizedContainerService.HintSize="1255,2363" sap2010:WorkflowViewState.IdRef="If_6">
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_20">
+              <Sequence sap:VirtualizedContainerService.HintSize="602,1256" sap2010:WorkflowViewState.IdRef="Sequence_20">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:EnumerateFiles Host="{x:Null}" KeyFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" DisplayName="Enumerate No SociosPath files" Files="[filesDT]" sap:VirtualizedContainerService.HintSize="334,87" sap2010:WorkflowViewState.IdRef="EnumerateFiles_1" IncludeSubdirectories="False" RemotePath="[in_Config(&quot;NonPartnerTempBDPath&quot;).ToString]" SecureFTP="False">
+                <ui:EnumerateFiles Host="{x:Null}" KeyFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" DisplayName="Enumerate No SociosPath files" Files="[filesDT]" sap:VirtualizedContainerService.HintSize="560,87" sap2010:WorkflowViewState.IdRef="EnumerateFiles_1" IncludeSubdirectories="False" RemotePath="[in_Config(&quot;NonPartnerTempBDPath&quot;).ToString]" SecureFTP="False">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -158,13 +158,13 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:EnumerateFiles>
-                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[filesDT]" DisplayName="For Each Row in filesDT" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[filesDT]" DisplayName="For Each Row in filesDT" sap:VirtualizedContainerService.HintSize="560,855" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
                   <ui:ForEachRow.Body>
                     <ActivityAction x:TypeArguments="sd:DataRow">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="sd:DataRow" Name="fileDTrow" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,637" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,736" sap2010:WorkflowViewState.IdRef="Sequence_9">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:String" Name="out_TempFileName" />
                         </Sequence.Variables>
@@ -173,9 +173,9 @@
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <If Condition="[fileDTrow(&quot;Name&quot;).ToString.ToUpper.Contains(&quot;NO_SOCIOS_BD&quot;)]" DisplayName="If fileExist" sap:VirtualizedContainerService.HintSize="484,545" sap2010:WorkflowViewState.IdRef="If_1">
+                        <If Condition="[fileDTrow(&quot;Name&quot;).ToString.ToUpper.Contains(&quot;NO_SOCIOS_BD&quot;)]" DisplayName="If fileExist" sap:VirtualizedContainerService.HintSize="484,644" sap2010:WorkflowViewState.IdRef="If_1">
                           <If.Then>
-                            <Sequence sap:VirtualizedContainerService.HintSize="376,369" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                            <Sequence sap:VirtualizedContainerService.HintSize="376,468" sap2010:WorkflowViewState.IdRef="Sequence_10">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -190,6 +190,7 @@
                                   <InArgument x:TypeArguments="x:String">[fileDTrow("Name").ToString.Trim]</InArgument>
                                 </Assign.Value>
                               </Assign>
+                              <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[fileDTrow(&quot;Fullname&quot;).ToString]" />
                               <ui:Download DownloadedFiles="{x:Null}" Host="{x:Null}" KeyFiles="{x:Null}" NotDownloadedFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" sap:VirtualizedContainerService.HintSize="334,115" sap2010:WorkflowViewState.IdRef="Download_1" LocalPath="Data\Temp\" RemotePath="[fileDTrow(&quot;Fullname&quot;).ToString]" SecureFTP="False" />
                               <ui:Break sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="Break_1" />
                             </Sequence>
@@ -200,12 +201,12 @@
                   </ui:ForEachRow.Body>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:ForEachRow>
-                <ui:EnumerateFiles Host="{x:Null}" KeyFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" DisplayName="Enumerate Input file" Files="[filesDT]" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="EnumerateFiles_5" IncludeSubdirectories="False" RemotePath="[in_Config(&quot;InputFilePath&quot;).ToString]" SecureFTP="False">
+                <ui:EnumerateFiles Host="{x:Null}" KeyFiles="{x:Null}" Password="{x:Null}" Port="{x:Null}" Username="{x:Null}" DisplayName="Enumerate Input file" Files="[filesDT]" sap:VirtualizedContainerService.HintSize="560,51" sap2010:WorkflowViewState.IdRef="EnumerateFiles_5" IncludeSubdirectories="False" RemotePath="[in_Config(&quot;InputFilePath&quot;).ToString]" SecureFTP="False">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -213,7 +214,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:EnumerateFiles>
-                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[filesDT]" DisplayName="For Each Row in filesDT" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
+                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[filesDT]" DisplayName="For Each Row in filesDT" sap:VirtualizedContainerService.HintSize="560,51" sap2010:WorkflowViewState.IdRef="ForEachRow_5">
                   <ui:ForEachRow.Body>
                     <ActivityAction x:TypeArguments="sd:DataRow">
                       <ActivityAction.Argument>
