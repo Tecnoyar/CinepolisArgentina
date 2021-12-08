@@ -125,7 +125,7 @@
     </ui:ForEach>
     <ui:OpenFTPSession KeyFiles="{x:Null}" DisplayName="Open FTP session" FTPSession="[FTPSession]" sap:VirtualizedContainerService.HintSize="1349,6051" Host="[in_Config(&quot;FTPserver&quot;).ToString]" sap2010:WorkflowViewState.IdRef="OpenFTPSession_1" Password="[in_Config(&quot;FTPPass&quot;).ToString]" Port="[convert.ToInt32(in_Config(&quot;FTPport&quot;).ToString)]" SecureFTP="False" Username="[in_Config(&quot;FTPUser&quot;).ToString]">
       <ui:OpenFTPSession.Body>
-        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1315,6694" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1315,6363" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <Sequence.Variables>
             <Variable x:TypeArguments="sd:DataTable" Name="filesDT" />
           </Sequence.Variables>
@@ -134,9 +134,9 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <If Condition="[in_TypeOfPocess.ToLower.Trim.Contains(&quot;nonpartner&quot;)]" DisplayName="If file type is non partner" sap:VirtualizedContainerService.HintSize="1273,3401" sap2010:WorkflowViewState.IdRef="If_6">
+          <If Condition="[in_TypeOfPocess.ToLower.Trim.Contains(&quot;nonpartner&quot;)]" DisplayName="If file type is non partner" sap:VirtualizedContainerService.HintSize="1273,3070" sap2010:WorkflowViewState.IdRef="If_6">
             <If.Then>
-              <Sequence sap:VirtualizedContainerService.HintSize="614,3243" sap2010:WorkflowViewState.IdRef="Sequence_20">
+              <Sequence sap:VirtualizedContainerService.HintSize="614,2912" sap2010:WorkflowViewState.IdRef="Sequence_20">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -167,22 +167,19 @@
                     <ActivityFunc x:TypeArguments="x:Boolean" />
                   </ui:RetryScope.Condition>
                 </ui:RetryScope>
-                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[filesDT]" DisplayName="For Each Row in filesDT" sap:VirtualizedContainerService.HintSize="572,825" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[filesDT]" DisplayName="For Each Row in filesDT" sap:VirtualizedContainerService.HintSize="572,494" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
                   <ui:ForEachRow.Body>
                     <ActivityAction x:TypeArguments="sd:DataRow">
                       <ActivityAction.Argument>
                         <DelegateInArgument x:TypeArguments="sd:DataRow" Name="fileDTrow" />
                       </ActivityAction.Argument>
-                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="526,705" sap2010:WorkflowViewState.IdRef="Sequence_9">
-                        <Sequence.Variables>
-                          <Variable x:TypeArguments="x:String" Name="out_TempFileName" />
-                        </Sequence.Variables>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,374" sap2010:WorkflowViewState.IdRef="Sequence_9">
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <Assign sap:VirtualizedContainerService.HintSize="484,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                        <Assign sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_1">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:String">[out_TempFileName]</OutArgument>
                           </Assign.To>
@@ -190,7 +187,14 @@
                             <InArgument x:TypeArguments="x:String">[fileDTrow("Name").ToString.Trim]</InArgument>
                           </Assign.Value>
                         </Assign>
-                        <If Condition="[fileDTrow(&quot;Name&quot;).ToString.ToUpper.Contains(&quot;NO_SOCIOS_BD&quot;)]" DisplayName="If fileExist" sap:VirtualizedContainerService.HintSize="484,513" sap2010:WorkflowViewState.IdRef="If_1">
+                        <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Temp DB file name: &quot;+out_TempFileName]" />
+                        <If Condition="[fileDTrow(&quot;Name&quot;).ToString.ToUpper.Contains(&quot;NO_SOCIOS_BD&quot;)]" DisplayName="If fileExist" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="If_1">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
                             <Sequence sap:VirtualizedContainerService.HintSize="376,336" sap2010:WorkflowViewState.IdRef="Sequence_10">
                               <sap:WorkflowViewStateService.ViewState>
