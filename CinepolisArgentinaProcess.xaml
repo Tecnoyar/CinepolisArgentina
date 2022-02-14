@@ -5,7 +5,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>901,1357</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>739,1357</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>CinepolisArgentina_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="56">
@@ -155,7 +155,7 @@
                   <av:PointCollection x:Key="ConnectorLocation">300,425.5 300,604</av:PointCollection>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <If Condition="[string.IsNullOrEmpty( blackListFileName) or string.IsNullOrEmpty( directorioFileName) or string.IsNullOrEmpty( inputFileName) or string.IsNullOrEmpty( tempFileName) or string.IsNullOrEmpty( tradFileName)]" DisplayName="If- files downloaded successfully or not" sap:VirtualizedContainerService.HintSize="484,291" sap2010:WorkflowViewState.IdRef="If_1">
+              <If Condition="[string.IsNullOrEmpty( blackListFileName) or string.IsNullOrEmpty( directorioFileName) or string.IsNullOrEmpty( inputFileName) or string.IsNullOrEmpty( tempFileName) or string.IsNullOrEmpty( tradFileName)]" DisplayName="If- files downloaded successfully or not" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_1">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -219,7 +219,9 @@
                           </sap:WorkflowViewStateService.ViewState>
                           <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke OpenTextFileInExcel workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="ManipulateInputFile\OpenTextFileInExcel.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
-                              <InArgument x:TypeArguments="x:String" x:Key="in_InputFileName">[inputFileName]</InArgument>
+                              <InArgument x:TypeArguments="x:String" x:Key="in_InputFileName">
+                                <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="inputFileName" />
+                              </InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                             <sap:WorkflowViewStateService.ViewState>
                               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -281,14 +283,26 @@
                                           <av:PointCollection x:Key="ConnectorLocation">210,1156 210,1204</av:PointCollection>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ManipulateBD workflow" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="ManipulateTempFile\ManipulateTempBD.xaml">
+                                      <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke ManipulateBD workflow" sap:VirtualizedContainerService.HintSize="352,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_12" UnSafe="False" WorkflowFileName="ManipulateTempFile\ManipulateTempBD.xaml">
                                         <ui:InvokeWorkflowFile.Arguments>
-                                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_InputDataTable">[inputDataTable]</InArgument>
-                                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_BlackListTrackingDatatable">[blackListDatatable]</InArgument>
-                                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[config]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="in_TempBDFileName">[tempFileName]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="in_DirectorioFileName">[directorioFileName]</InArgument>
-                                          <InArgument x:TypeArguments="x:String" x:Key="in_TypeOfPocess">[in_ProcessType]</InArgument>
+                                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_InputDataTable">
+                                            <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="inputDataTable" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="sd:DataTable" x:Key="in_BlackListTrackingDatatable">
+                                            <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="blackListDatatable" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
+                                            <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="config" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_TempBDFileName">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="tempFileName" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_DirectorioFileName">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="directorioFileName" />
+                                          </InArgument>
+                                          <InArgument x:TypeArguments="x:String" x:Key="in_TypeOfPocess">
+                                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_ProcessType" />
+                                          </InArgument>
                                         </ui:InvokeWorkflowFile.Arguments>
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">

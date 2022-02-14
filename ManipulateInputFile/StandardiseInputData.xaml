@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>901,811</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>739,811</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>StandardiseInputData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -40,6 +40,7 @@
       <x:String>UiPath.Excel</x:String>
       <x:String>System.Activities.DynamicUpdate</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -82,7 +83,7 @@
         <x:Boolean x:Key="IsPinned">False</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_InputDataTable]" DisplayName="ReadInputFile" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[inputSheetName]" WorkbookPath="[&quot;C:\Users\&quot;+Environment.UserName+&quot;\Desktop\&quot;+Path.GetFileNameWithoutExtension(in_InputFileName)+&quot;.xlsx&quot;]" />
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DataTable="[out_InputDataTable]" DisplayName="ReadInputFile" sap:VirtualizedContainerService.HintSize="338,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[inputSheetName]" WorkbookPath="[Directory.GetCurrentDirectory+&quot;\Data\Input\&quot;+Path.GetFileNameWithoutExtension(in_InputFileName)+&quot;.xlsx&quot;]" />
     <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[out_InputDataTable]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="338,372" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
@@ -100,7 +101,7 @@
                 <OutArgument x:TypeArguments="x:Object">[CurrentRow.Item("DateTime")]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[Split(CurrentRow.Item("DateTime").ToString," ")(0).ToString]</InArgument>
+                <InArgument x:TypeArguments="x:String">[Split(CurrentRow.Item("DateTime").ToString," ")(0).ToString.Trim]</InArgument>
               </Assign.Value>
             </Assign>
             <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_2">
@@ -108,13 +109,13 @@
                 <OutArgument x:TypeArguments="x:Object">[CurrentRow.Item("Name")]</OutArgument>
               </Assign.To>
               <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[If(system.Text.RegularExpressions.Regex.IsMatch(CurrentRow.Item("Name").ToString,"[0-9]") or CurrentRow.Item("Name").ToString.Contains("!") or CurrentRow.Item("Name").ToString.Contains("@") or CurrentRow.Item("Name").ToString.Contains("#") or CurrentRow.Item("Name").ToString.Contains("$") or CurrentRow.Item("Name").ToString.Contains("%") or CurrentRow.Item("Name").ToString.Contains("^") or CurrentRow.Item("Name").ToString.Contains("\") or CurrentRow.Item("Name").ToString.Contains("/") or CurrentRow.Item("Name").ToString.Contains("&amp;") or CurrentRow.Item("Name").ToString.Contains("*")," ",CurrentRow.Item("Name").ToString)]</InArgument>
+                <InArgument x:TypeArguments="x:String">[If(system.Text.RegularExpressions.Regex.IsMatch(CurrentRow.Item("Name").ToString,"[0-9]") or CurrentRow.Item("Name").ToString.Contains("!") or CurrentRow.Item("Name").ToString.Contains("@") or CurrentRow.Item("Name").ToString.Contains("#") or CurrentRow.Item("Name").ToString.Contains("$") or CurrentRow.Item("Name").ToString.Contains("%") or CurrentRow.Item("Name").ToString.Contains("^") or CurrentRow.Item("Name").ToString.Contains("\") or CurrentRow.Item("Name").ToString.Contains("/") or CurrentRow.Item("Name").ToString.Contains("&amp;") or CurrentRow.Item("Name").ToString.Contains("*"),string.Empty,CurrentRow.Item("Name").ToString)]</InArgument>
               </Assign.Value>
             </Assign>
           </Sequence>
         </ActivityAction>
       </ui:ForEachRow.Body>
     </ui:ForEachRow>
-    <ui:WriteRange AddHeaders="True" DataTable="[out_InputDataTable]" DisplayName="Write manipulatedDataIntoInputExcelFile" sap:VirtualizedContainerService.HintSize="338,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[inputSheetName]" StartingCell="A1" WorkbookPath="[&quot;C:\Users\&quot;+Environment.UserName+&quot;\Desktop\&quot;+Path.GetFileNameWithoutExtension(in_InputFileName)+&quot;.xlsx&quot;]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[out_InputDataTable]" DisplayName="Write manipulatedDataIntoInputExcelFile" sap:VirtualizedContainerService.HintSize="338,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="[inputSheetName]" StartingCell="A1" WorkbookPath="[Directory.GetCurrentDirectory+&quot;\Data\Input\&quot;+Path.GetFileNameWithoutExtension(in_InputFileName)+&quot;.xlsx&quot;]" />
   </Sequence>
 </Activity>
